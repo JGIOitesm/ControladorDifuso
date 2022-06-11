@@ -17,7 +17,7 @@
 	<node pkg="rosservice" type="rosservice" name="load_turtle2" 
 		  args="call /spawn 10 5.5 1.57 'turtle2'"/>
 
-	<node pkg="turtles_fuzzy_logic" type="fuzzy_t1.py" name="fuzzy_t1" output="screen"/>
+	<node pkg="turtles_fuzzy_logic" type="fuzzy_t1_ej2.py" name="fuzzy_t1" output="screen"/>
 	
 	<node pkg="turtles_fuzzy_logic" type="fuzzy_t2.py" name="fuzzy_t2"/>
 

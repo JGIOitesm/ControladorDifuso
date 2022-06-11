@@ -9,5 +9,4 @@ if __name__ == '__main__':
     time.sleep(3)
 
     while True:
-        # turtle_main.go_to_goal(turtle_pursuited.x, turtle_pursuited.y)
         turtle_main.orientate(turtle_pursuited.x, turtle_pursuited.y)

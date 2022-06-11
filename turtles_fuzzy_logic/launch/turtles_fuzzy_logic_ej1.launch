@@ -1,0 +1,25 @@
+<launch>
+	
+	<node pkg="turtlesim" type="turtlesim_node" name="el_turlesim" />
+
+		<node pkg="rosservice" type="rosservice" name="teleport_turtle_1" 
+		  args="call /turtle1/teleport_absolute 5.5 5.5 1.57 "/>
+
+	<node pkg="rosservice" type="rosservice" name="clear" 
+		  args="call /clear "/>
+	<node pkg="rosservice" type="rosservice" name="clear1" 
+		  args="call /clear "/>
+	<node pkg="rosservice" type="rosservice" name="clear2" 
+		  args="call /clear "/>	
+	<node pkg="rosservice" type="rosservice" name="clear3" 
+		  args="call /clear "/>
+
+	<node pkg="rosservice" type="rosservice" name="load_turtle2" 
+		  args="call /spawn 10 5.5 1.57 'turtle2'"/>
+
+	<node pkg="turtles_fuzzy_logic" type="fuzzy_t1_ej1.py" name="fuzzy_t1" output="screen"/>
+	
+	<node pkg="turtles_fuzzy_logic" type="fuzzy_t2.py" name="fuzzy_t2"/>
+
+	
+</launch>
