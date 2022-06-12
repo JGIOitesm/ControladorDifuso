@@ -86,55 +86,55 @@ center_v, vel_t1_output, center_w, omega_t1_output = turtle_calc(dist_input, ang
 print("Velocidad lineal de la tortuga: ", center_v)
 print("Velocidad angular de la tortuga: ", center_w)
 
-with plt.xkcd():
-    plt.subplot(2,3,1)
-    for dist_mf in d_t2_mfs:
-        plt.plot(dist_t2, dist_mf)
-    plt.legend(["Lejos", "Medio lejos","Medio", "Medio cerca", "Cerca"], loc='lower left')
-    plt.ylabel(r'$\mu$')
-    plt.xlabel("m")
-    plt.title("Entrada 1: Distancia de la tortuga 2")
+plt.subplot(2,3,1)
+for dist_mf in d_t2_mfs:
+    plt.plot(dist_t2, dist_mf)
+plt.legend(["Lejos", "Medio lejos","Medio", "Medio cerca", "Cerca"], loc='lower left')
+plt.ylabel(r'$\mu$')
+plt.xlabel("m")
+plt.title("Entrada 1: Distancia de la tortuga 2")
 
-    plt.subplot(2,3,4)
-    for angle_mf in a_t2_mfs:
-        plt.plot(angle_t2, angle_mf)
-    plt.legend(["Extremo izquierda", "Medio izquierda", "Centrado", "Medio derecja", "Extremo derecha"], loc='lower left')
-    plt.ylabel(r"$\mu$")
-    plt.xlabel(r"$\alpha$")
-    plt.title('Entrada 2: Diferencia de ángulos')
+plt.subplot(2,3,4)
+for angle_mf in a_t2_mfs:
+    plt.plot(angle_t2, angle_mf)
+plt.legend(["Extremo izquierda", "Medio izquierda", "Centrado", "Medio derecja", "Extremo derecha"], loc='lower left')
+plt.ylabel(r"$\mu$")
+plt.xlabel("grados")
+plt.title('Entrada 2: Diferencia de ángulos')
 
-    plt.subplot(2,3,2)
-    for v_t1_mf in v_t1_mfs:
-        plt.plot(vel_t1, v_t1_mf)
-    plt.legend(["Alta", "Media alta", "Media", "Media baja", "Baja"], loc='lower left')
-    plt.ylabel(r'$\mu$')
-    plt.xlabel('m/s')
-    plt.title('Salida: Velocidad Lineal Tortuga 1')
+plt.subplot(2,3,2)
+for v_t1_mf in v_t1_mfs:
+    plt.plot(vel_t1, v_t1_mf)
+plt.legend(["Alta", "Media alta", "Media", "Media baja", "Baja"], loc='lower left')
+plt.ylabel(r'$\mu$')
+plt.xlabel('m/s')
+plt.title('Salida: Velocidad Lineal Tortuga 1')
 
-    plt.subplot(2,3,5)
-    plt.plot(vel_t1, vel_t1_output)
-    plt.ylabel(r'$\mu$')
-    plt.xlabel('m/s')
-    plt.ylim([0, 1.05])
-    plt.title('Control Velocidad Lineal')
+plt.subplot(2,3,5)
+plt.plot(vel_t1, vel_t1_output)
+plt.axvline(x=center_v)
+plt.ylabel(r'$\mu$')
+plt.xlabel('m/s')
+plt.ylim([0, 1.05])
+plt.title('Control Velocidad Lineal')
 
-    plt.subplot(2,3,3)
-    for w_t1_mf in w_t1_mfs:
-        plt.plot(w_t1, w_t1_mf)
-    plt.legend(["Alta Derecha", "Media Derecha", "Baja", "Media Izquierda", "Alta Izquirda"], loc='lower left')
-    plt.ylabel(r'$\mu$')
-    plt.xlabel('m/s')
-    plt.title('Salida: Velocidad Angular Tortuga 1')
+plt.subplot(2,3,3)
+for w_t1_mf in w_t1_mfs:
+    plt.plot(w_t1, w_t1_mf)
+plt.legend(["Alta Derecha", "Media Derecha", "Baja", "Media Izquierda", "Alta Izquirda"], loc='lower left')
+plt.ylabel(r'$\mu$')
+plt.xlabel('rad/s')
+plt.title('Salida: Velocidad Angular Tortuga 1')
 
-    plt.subplot(2,3,6)
-    plt.plot(w_t1, omega_t1_output)
-    plt.ylabel(r'$\mu$')
-    plt.xlabel('rad/s')
-    plt.ylim([0, 1.05])
-    plt.title('Control Velocidad Angular')
-    plt.show()
+plt.subplot(2,3,6)
+plt.plot(w_t1, omega_t1_output)
+plt.axvline(x=center_w)
+plt.ylabel(r'$\mu$')
+plt.xlabel('rad/s')
+plt.ylim([0, 1.05])
+plt.title('Control Velocidad Angular')
+plt.show()
 
-plt.figure(1)
 ax = plt.axes(projection = '3d')
 X, Y = np.meshgrid(angle_t2, dist_t2)
 Z1 = np.zeros((len(dist_t2), len(angle_t2)))
@@ -142,8 +142,6 @@ Z2 = np.zeros((len(dist_t2), len(angle_t2)))
 for angle in range(len(angle_t2)):
     for dist in range(len(dist_t2)):
         Z1[dist,angle],Z2[dist,angle] = turtle_calc(dist_t2[dist], angle_t2[angle])
-
-
         
 with open("surface_v_lin.csv", "w") as f:
     wr = csv.writer(f)
@@ -159,8 +157,6 @@ ax.set_zlabel("Velocidad Lineal [m/s]")
 ax.set_title("Superficie de Control Velocidad Lineal")
 plt.show()
 
-
-plt.figure(2)
 ax = plt.axes(projection = '3d')
 ax.plot_surface(X, Y, Z2, rstride=1, cstride=1, cmap='inferno', edgecolor='none')
 ax.set_xlabel("Angulo tortuga [rad]")
